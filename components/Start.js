@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TextInput, ImageBackground, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, ImageBackground, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import background from '../assets/bkg.png'
 
 export default class Start extends React.Component {
@@ -13,7 +13,7 @@ export default class Start extends React.Component {
 
   render() {
     return (
-      <View style={styles.main}>
+      <ScrollView style={styles.main}>
         <ImageBackground
           source={background}
           resizeMode="cover"
@@ -67,7 +67,7 @@ export default class Start extends React.Component {
             </TouchableOpacity>
           </View>
         </ImageBackground>
-      </View>
+      </ScrollView>
     )
   }
 }
