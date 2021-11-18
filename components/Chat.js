@@ -12,51 +12,57 @@ export default class Chat extends React.Component {
       messages: [],
       user: {
         _id: "",
-        name: "",
+        name: "React Native",
         avatar: "https://placeimg.com/140/140/any",
       },
     }
 
     // settings for firebase, if it's not initialized
+    const firebaseConfig = {
+      apiKey: "AIzaSyAhC1-cr8E4iOHK620kIzENht6uuRD4faQ",
+      authDomain: "gosprit-43f16.firebaseapp.com",
+      projectId: "gosprit-43f16",
+      storageBucket: "gosprit-43f16.appspot.com",
+      messagingSenderId: "915207361868",
+      appId: "1:915207361868:web:8079e28844320c01ce2be9",
+      measurementId: "G-5VRKB5GEW2"
+    };
+
     if (!firebase.apps.length) {
-      firebase.initializeApp({
-        apiKey: "AIzaSyAhC1-cr8E4iOHK620kIzENht6uuRD4faQ",
-        authDomain: "gosprit-43f16.firebaseapp.com",
-        projectId: "gosprit-43f16",
-        storageBucket: "gosprit-43f16.appspot.com",
-        messagingSenderId: "915207361868",
-        appId: "1:915207361868:web:8079e28844320c01ce2be9",
-        measurementId: "G-5VRKB5GEW2"
-      });
-    }
-    this.messagesCollection = firebase.firestore().collection('messages');
+      firebase.initializeApp(firebaseConfig)
+    };
+
+    this.referenceChatMessages = firebase.firestore().collection("messages");
   }
 
-  componentDidMount = () => {
+  componentDidMount() {
+    // import name from Start
     const { name } = this.props.route.params
     this.props.navigation.setOptions({ title: name });
-    this.referenceMessages = firebase.firestore().collection('messages');
+
+    // Reference to load messages via Firebase
+    this.referenceChatMessages = firebase.firestore().collection("messages");
+
+    // Authenticates user via Firebase
     this.authUnsubscribe = firebase.auth().onAuthStateChanged(async (user) => {
       if (!user) {
         await firebase.auth().signInAnonymously();
       }
-      this.unsubscribe = this.referenceMessages.onSnapshot(this.onCollectionUpdated)
+
       this.setState({
-        _id: 1,
-        text: `Hello ${name}`,
-        createdAt: new Date(),
         user: {
-          _id: 2,
-          name: 'React Native',
-          avatar: 'https://placeimg.com/140/140/any',
+          _id: 1,
+          name: "React Native",
+          avatar: "https://placeimg.com/140/140/any",
         },
         messages: [],
       });
+
       this.unsubscribe = this.referenceChatMessages
         .orderBy("createdAt", "desc")
         .onSnapshot(this.onCollectionUpdate);
     });
-  };
+  }
 
   componentWillUnmount() {
     this.authUnsubscribe();
@@ -68,7 +74,7 @@ export default class Chat extends React.Component {
     // go through each document
     querySnapshot.forEach((doc) => {
       // get the QueryDocumentSnapshot's data
-      const data = doc.data();
+      var data = doc.data();
       messages.push({
         _id: data._id,
         text: data.text,
@@ -94,10 +100,16 @@ export default class Chat extends React.Component {
     });
   }
 
+  // event handler for sending messages
   onSend(messages = []) {
     this.setState(previousState => ({
       messages: GiftedChat.append(previousState.messages, messages),
-    }));
+    }),
+      // save previous chat log
+      () => {
+        this.addMessage();
+      }
+    );
   }
 
   // message bubble color 
