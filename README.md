@@ -1,28 +1,45 @@
-# GOSPRIT - A CHAT APP
+# Gosprit v1.0 - the chat app
 
-# What?
-Created using React Native, this app allow users to chat in an interface that can share location, images and take pictures using a device's camera.
+Built with React Native and developed using Expo.
 
-# Why?
-I created this app to pass React Native portion of the CareerFoundry bootcamp
+The chat interface functionality is created with the [Gifted Chat](https://www.npmjs.com/package/react-native-gifted-chat). 
+Chat conversations are stored in (Firebase)[https://firebase.google.com] database. Also accessible if offline.
 
-# What can it do? 
-* Users can enter their in the main input bar and choose between five different background colors. 
-* Users can choose photos from either their library or take a photo from their camera.
-* Location can be shared bewteen users.
-* Data is stored on the client-side and is available when the user is offline.
+Users are able to share images (take a picture or choose from media library) once the user grants access to their local media library
+and camera. Location sharing is possible, after the user grants access.
 
-# Technology used:
-* Expo
-* React Native
-* Gifted Chat
-* Google Firestore Database
+### Install dependencies
 
-# Installation guide
-* Download and extract files
-* Install expo using `npm install expo-cli --global`
-* Install dependencies `npm install`
-* Install Expo app on your mobile device. Available in both the Google play store and the Apple store
-* Alternatively use Android Studio emulator
-* Start it in console using `expo start` in the root directory
-* Use LAN connection in the browser and select GOSPRIT in Expo app on your device
+Check if you are running the latest version of [Node](https://nodejs.org/en/).
+
+1. Install [Expo](https://expo.io/)
+
+```
+$ npm install expo-cli --global
+ ```
+ 
+2. Install dependencies 
+```
+$ npm install
+```
+
+3. Start expo server
+```
+$ expo start
+```
+
+### Mobile Device Setup
+- Install the Expo app through your device's app store (iOS or Android)
+- Login with expo account
+- Scan the QR Code on the Metro Builder
+
+### Device Emulator Setup
+- If you would like to run the app on your machine through a simulator/emulator, you will either need
+  - [Android Studio](https://docs.expo.io/workflow/android-studio-emulator/)
+  - [iOS Simulator](https://docs.expo.io/workflow/ios-simulator/)
+
+## Features
+- Home page where users can enter their name and choose a background color for the chat screen
+- Conversation page displaying the conversation
+- Users can send images and location data 
+- Datastorage online in firebase Cloud and local storage offline
