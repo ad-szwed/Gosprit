@@ -3,7 +3,7 @@
 Built with React Native and developed using Expo.
 
 The chat interface functionality is created with the [Gifted Chat](https://www.npmjs.com/package/react-native-gifted-chat). 
-Chat conversations are stored in (Firebase)[https://firebase.google.com] database. Also accessible if offline.
+Chat conversations are stored in [Firebase](https://firebase.google.com) database. Also accessible if offline.
 
 Users are able to share images (take a picture or choose from media library) once the user grants access to their local media library
 and camera. Location sharing is possible, after the user grants access.
